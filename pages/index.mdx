@@ -1,0 +1,40 @@
+---
+title: Introduction
+noTitle: true
+noHeading: true
+noTOC: true
+keepTOCSpace: true
+noFooterNav: true
+---
+
+import Heading from "@components/ui/heading.tsx"
+import Cover from "@components/ui/cover.tsx"
+import LinkCard from "@components/ui/link-card.tsx"
+import Book from "@components/icons/book.mdx"
+import Bolt from "@components/icons/bolt.mdx"
+
+<Heading>Introduction</Heading>
+
+Welcome to the Ribbon docs. Explore guides and tutorials to build beautiful, optimized websites using Ribbon.
+
+<div className="grid grid-cols-1 sm:grid-cols-2 mt-20 mb-20 gap-4">
+  <LinkCard
+    title="MDX"
+    href="/guides/basics/mdx"
+    description="A powerful mix between Markdown and React components."
+    Icon={Book}
+  />
+  <LinkCard
+    title="Markdoc"
+    href="/guides/basics/markdoc"
+    description="A clean separation between content and code, enforced by schemas."
+    Icon={Bolt}
+  />
+</div>
+
+<Cover
+    title="Get started"
+    subtitle="Follow the quick intro to get started building beautiful and performant Ribbon websites."
+    cta="Start now"
+    ctaHref="/guides/quick-start/create-a-project"
+  />

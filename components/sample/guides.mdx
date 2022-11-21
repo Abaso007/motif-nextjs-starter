@@ -1,0 +1,61 @@
+import { useState } from "react"
+import cn from "classnames"
+import config from "/project-config"
+
+export const GalleryItem = ({ title, subtitle, cover, href, index }) => {
+  return <div className="flex flex-col gap-1">
+      <a href={href} className="unstyled-link no-underline">
+        <div className="h-32 bg-gradient-to-br rounded-lg hover:shadow-lg transition cursor-pointer duration-300 bg-cover bg-center flex items-center justify-center">
+          <img className="rounded-md w-full h-full object-cover" src={cover} />
+        </div>
+      </a>
+      <a href={href} className="unstyled-link no-underline text-neutral-900 dark:text-white hover:text-primary-500 transition font-medium text-sm pt-4">{ title }</a>
+      <div className="prose prose-neutral dark:prose-invert text-sm">{ subtitle }</div>
+    </div>
+}
+
+export const Tab = ({ label, active, onClick }) => {
+  return <div className={cn(
+        "pt-2 pb-1 border-b-2 font-medium text-sm cursor-pointer",
+        {
+          "border-primary-500 dark:border-primary-400 text-primary-500 dark:text-white": active,
+          "text-neutral-900 dark:text-white/60 border-b-2 border-transparent hover:border-primary-400": !active,
+        }
+      )}
+      onClick={onClick}
+    >{ label }</div>
+}
+export const TabBar = ({ tabs, activeIndex, onSelect }) => {
+  return <div className="flex flex-row gap-6 border-b border-gray-100 dark:border-white/10">
+    { tabs.map((t, i) => (
+        <Tab
+          label={t}
+          active={activeIndex === i}
+          onClick={() => onSelect(i)}
+        />)
+      )
+    }
+    </div>
+}
+
+export const Guides = () => {
+  const [tab, setTab] = useState(0)
+  const gallery = config.sampleGallery
+  return <div>
+    <TabBar tabs={Object.keys(gallery)} activeIndex={tab} onSelect={setTab} />
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6">
+      {gallery[Object.keys(gallery)[tab]].map((card, i) => {
+        return <GalleryItem
+          index={tab + i}
+          title={card.title}
+          subtitle={card.description || ''}
+          href={card.href}
+          cover={card.cover}
+        />
+      })}
+    </div>
+  </div>
+}
+
+
+<Guides />

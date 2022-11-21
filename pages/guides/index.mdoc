@@ -1,0 +1,58 @@
+---
+title: Introduction
+description: Lorem ipsum description
+noTOC: true
+keepTOCSpace: true
+---
+
+{% sampleGuides /%}
+
+{% spacer size="xl" /%}
+
+{% collapse title="Learn more" %}
+Head over to the [Markdoc guide for content writers](/guides/basics/markdoc) to learn more about how to use this template.
+{% /collapse %}
+
+{% spacer /%}
+
+{% openapidoc
+  url="https://petstore.swagger.io/v2/swagger.json"
+  path="/pet/{petId}/uploadImage"
+  method="POST"
+/%}
+
+Source: [Petstore OpenAPI spec](https://petstore.swagger.io/v2/swagger.json)
+
+{% spacer /%}
+
+{% httpapidoc
+  method="GET"
+  baseUrl="http://api.example.com"
+  path="/greet"
+  description="Greet the user."
+  parameters=[
+    {
+      "name": "status",
+      "in": "query",
+      "description": "Status values that need to be considered for filter",
+      "required": true,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["available", "pending", "sold"],
+        "default": "available"
+      },
+      "collectionFormat": "multi"
+    }
+  ]
+  responses={
+    "200": {
+      "description": "successful operation",
+      "schema": {
+        "type": "array",
+        "items": { "$ref": "#/definitions/Pet" }
+      }
+    },
+    "400": { "description": "Invalid status value" }
+  }
+  /%}
